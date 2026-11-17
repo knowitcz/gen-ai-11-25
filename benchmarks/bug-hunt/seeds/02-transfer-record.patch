@@ -1,0 +1,15 @@
+diff --git a/app/services/account_service.py b/app/services/account_service.py
+index 841faf8..b38b7fe 100644
+--- a/app/services/account_service.py
++++ b/app/services/account_service.py
+@@ -44,8 +44,8 @@ class AccountService:
+                 self.account_repository.deposit_money(to_account_id, amount)
+                 self.transaction_repository.create(
+                     Transaction(
+-                        source_account_id=from_account_id,
+-                        target_account_id=to_account_id,
++                        source_account_id=to_account_id,
++                        target_account_id=from_account_id,
+                         amount=amount,
+                     )
+                 )

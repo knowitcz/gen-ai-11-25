@@ -72,3 +72,6 @@ logs/
 
 # Node
 node_modules/
+
+# Scratch space (e.g. bug-hunt benchmark worktrees)
+.tmp/

@@ -1,0 +1,20 @@
+{
+  "seeds": [
+    {"id": "S1", "patch": "01-full-balance.patch", "file": "app/repository/account_repository.py", "lines": "46", "difficulty": "medium", "category": "logic",
+     "defect": "Insufficient-balance check uses <= instead of <, so withdrawing (or transferring) the exact full balance is refused."},
+    {"id": "S2", "patch": "02-transfer-record.patch", "file": "app/services/account_service.py", "lines": "45-51", "difficulty": "medium", "category": "data-integrity",
+     "defect": "transfer_money records the Transaction with source and target account ids swapped, so history shows money flowing the wrong way."},
+    {"id": "S3", "patch": "03-transaction-type.patch", "file": "app/models/schemas.py", "lines": "34-39", "difficulty": "easy", "category": "logic",
+     "defect": "TransactionRead.type labels are inverted: a transaction with no target (a withdrawal) is reported as DEPOSIT and one with no source (a deposit) as WITHDRAWAL."},
+    {"id": "S4", "patch": "04-to-date.patch", "file": "app/repository/transaction_repository.py", "lines": "69-70", "difficulty": "hard", "category": "logic",
+     "defect": "find_transactions filters with date < to_date although the bound is documented as inclusive and get_summary uses <=, so list and summary disagree at the boundary."},
+    {"id": "S5", "patch": "05-account-filter.patch", "file": "app/services/transaction_service.py", "lines": "53-66", "difficulty": "medium", "category": "logic",
+     "defect": "When account_id is given, account_ids is still set to all of the client's accounts, so the account filter is ignored."},
+    {"id": "S6", "patch": "06-atm-withdraw.patch", "file": "app/services/bank_service.py", "lines": "55-56", "difficulty": "hard", "category": "security",
+     "defect": "AtmBankService.withdraw_money no longer calls the amount validator (deposit_money still does), so ATM withdrawals bypass the maximum cash amount."},
+    {"id": "S7", "patch": "07-cash-limit.patch", "file": "app/validator/amount_validator.py", "lines": "46-49", "difficulty": "easy", "category": "logic",
+     "defect": "validate_maximum_cash_amount rejects amount >= 10000 although the rule and message say the amount may not exceed 10000, so exactly 10000 is refused."},
+    {"id": "S8", "patch": "08-withdraw-record.patch", "file": "app/services/account_service.py", "lines": "63-71", "difficulty": "hard", "category": "data-integrity",
+     "defect": "In withdraw_money the Transaction is created after the session.begin() block has committed, so the balance change is committed but the transaction record is never committed (and is not atomic with it)."}
+  ]
+}

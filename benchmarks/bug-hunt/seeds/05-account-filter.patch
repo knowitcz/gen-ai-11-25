@@ -1,0 +1,13 @@
+diff --git a/app/services/transaction_service.py b/app/services/transaction_service.py
+index fafb2bc..b469e31 100644
+--- a/app/services/transaction_service.py
++++ b/app/services/transaction_service.py
+@@ -61,7 +61,7 @@ class TransactionService:
+                     raise ValueError(
+                         f"Account {account_id} does not belong to client {client_id}"
+                     )
+-                account_ids = [account_id]
++                account_ids = [a.id for a in accounts]
+             else:
+                 account_ids = [a.id for a in accounts]
+ 

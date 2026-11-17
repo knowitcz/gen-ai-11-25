@@ -1,0 +1,12 @@
+diff --git a/app/validator/amount_validator.py b/app/validator/amount_validator.py
+index ccb4659..faf4c31 100644
+--- a/app/validator/amount_validator.py
++++ b/app/validator/amount_validator.py
+@@ -44,6 +44,6 @@ class AmountValidator(Protocol):
+ 
+ 
+ def validate_maximum_cash_amount(amount: int) -> ValidationResult:
+-    if amount > 10000:
++    if amount >= 10000:
+         return ValidationResult.error("Amount cannot exceed 10000.")
+     return ValidationResult.success()

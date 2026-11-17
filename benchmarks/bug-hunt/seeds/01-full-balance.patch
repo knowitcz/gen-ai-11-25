@@ -1,0 +1,13 @@
+diff --git a/app/repository/account_repository.py b/app/repository/account_repository.py
+index 41373cb..99b2fb6 100644
+--- a/app/repository/account_repository.py
++++ b/app/repository/account_repository.py
+@@ -43,7 +43,7 @@ class AccountRepository:
+         account = self.get_by_id(account_id)
+         if not account:
+             raise ValueError("Account not found")
+-        if account.balance < amount:
++        if account.balance <= amount:
+             raise ValueError("Insufficient balance")
+         account.balance -= amount
+         self.session.add(account)

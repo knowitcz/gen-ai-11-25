@@ -1,0 +1,24 @@
+diff --git a/app/services/account_service.py b/app/services/account_service.py
+index b38b7fe..91609b0 100644
+--- a/app/services/account_service.py
++++ b/app/services/account_service.py
+@@ -62,13 +62,13 @@ class AccountService:
+         try:
+             with self.account_repository.session.begin():
+                 self.account_repository.withdraw_money(account_id, amount)
+-                self.transaction_repository.create(
+-                    Transaction(
+-                        source_account_id=account_id,
+-                        target_account_id=None,
+-                        amount=amount,
+-                    )
++            self.transaction_repository.create(
++                Transaction(
++                    source_account_id=account_id,
++                    target_account_id=None,
++                    amount=amount,
+                 )
++            )
+             logger.info("Withdrawal completed: %d from account %d", amount, account_id)
+         except Exception as e:
+             logger.error("Withdrawal failed: %s", e, exc_info=True)

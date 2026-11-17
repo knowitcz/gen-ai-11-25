@@ -1,0 +1,16 @@
+diff --git a/app/models/schemas.py b/app/models/schemas.py
+index 452d111..41b7cba 100644
+--- a/app/models/schemas.py
++++ b/app/models/schemas.py
+@@ -32,9 +32,9 @@ class TransactionRead(SQLModel):
+     @computed_field  # type: ignore[prop-decorator]
+     @property
+     def type(self) -> str:
+-        if self.source_account_id is None:
+-            return "DEPOSIT"
+         if self.target_account_id is None:
++            return "DEPOSIT"
++        if self.source_account_id is None:
+             return "WITHDRAWAL"
+         return "TRANSFER"
+ 

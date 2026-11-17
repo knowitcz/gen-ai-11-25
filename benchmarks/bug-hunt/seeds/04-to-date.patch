@@ -1,0 +1,13 @@
+diff --git a/app/repository/transaction_repository.py b/app/repository/transaction_repository.py
+index f20d60f..b5ecbd8 100644
+--- a/app/repository/transaction_repository.py
++++ b/app/repository/transaction_repository.py
+@@ -67,7 +67,7 @@ class TransactionRepository:
+         if from_date is not None:
+             statement = statement.where(Transaction.date >= from_date)
+         if to_date is not None:
+-            statement = statement.where(Transaction.date <= to_date)
++            statement = statement.where(Transaction.date < to_date)
+ 
+         statement = statement.order_by(Transaction.date.desc())  # type: ignore[union-attr]
+ 
